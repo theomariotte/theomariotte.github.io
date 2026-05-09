@@ -1,38 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title> Théo Mariotte — Audio and Speech Researcher</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;1,300&display=swap"
+    rel="stylesheet">
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
       /* ── palette: 386641 / 6a994e / a7c957 / f2e8cf / bc4749 ── */
-      --forest:  #386641;   /* deep green — topbar, statusbar */
-      --fern:    #6a994e;   /* mid green — accents, active tab dot */
-      --lime:    #a7c957;   /* light green — highlights, links hover */
-      --cream:   #f2e8cf;   /* warm cream — main background */
-      --red:     #bc4749;   /* muted red — DOI links, funders, warnings */
+      --forest: #386641;
+      /* deep green — topbar, statusbar */
+      --fern: #6a994e;
+      /* mid green — accents, active tab dot */
+      --lime: #a7c957;
+      /* light green — highlights, links hover */
+      --cream: #f2e8cf;
+      /* warm cream — main background */
+      --red: #bc4749;
+      /* muted red — DOI links, funders, warnings */
 
       /* derived surfaces */
-      --bg:       #f2e8cf;               /* cream page bg */
-      --surface:  #ebe0c3;               /* slightly darker cream — topbar, tab active */
-      --border:   rgba(56,102,65,0.18);  /* forest at low opacity */
-      --dim:      rgba(56,102,65,0.38);  /* muted forest */
-      --muted:    #6a7a5a;               /* desaturated mid-green for secondary text */
-      --body:     #2c3828;               /* very dark green — main text */
-      --bright:   #1a2318;               /* near-black green — headings */
+      --bg: #f2e8cf;
+      /* cream page bg */
+      --surface: #ebe0c3;
+      /* slightly darker cream — topbar, tab active */
+      --border: rgba(56, 102, 65, 0.18);
+      /* forest at low opacity */
+      --dim: rgba(56, 102, 65, 0.38);
+      /* muted forest */
+      --muted: #6a7a5a;
+      /* desaturated mid-green for secondary text */
+      --body: #2c3828;
+      /* very dark green — main text */
+      --bright: #1a2318;
+      /* near-black green — headings */
 
       --mono: 'IBM Plex Mono', 'Courier New', monospace;
       --sans: 'IBM Plex Sans', system-ui, sans-serif;
     }
 
-    html, body {
+    html,
+    body {
       height: 100%;
       background: var(--bg);
       color: var(--body);
@@ -58,6 +80,7 @@
       background: var(--forest);
       user-select: none;
     }
+
     .topbar-name {
       font-family: var(--mono);
       font-size: 0.78rem;
@@ -65,10 +88,11 @@
       color: var(--cream);
       letter-spacing: 0.06em;
     }
+
     .topbar-sub {
       font-family: var(--mono);
       font-size: 0.64rem;
-      color: rgba(242,232,207,0.55);
+      color: rgba(242, 232, 207, 0.55);
       letter-spacing: 0.08em;
     }
 
@@ -82,7 +106,10 @@
       overflow-x: auto;
       scrollbar-width: none;
     }
-    #tabbar::-webkit-scrollbar { display: none; }
+
+    #tabbar::-webkit-scrollbar {
+      display: none;
+    }
 
     .tab {
       font-family: var(--mono);
@@ -102,15 +129,26 @@
       align-items: center;
       gap: 0.45rem;
     }
-    .tab:hover { color: var(--body); }
+
+    .tab:hover {
+      color: var(--body);
+    }
+
     .tab.active {
       color: var(--bright);
       background: var(--bg);
       border-color: var(--border);
       border-bottom-color: var(--bg);
     }
-    .tab-dot { font-size: 0.55rem; color: transparent; }
-    .tab.active .tab-dot { color: var(--fern); }
+
+    .tab-dot {
+      font-size: 0.55rem;
+      color: transparent;
+    }
+
+    .tab.active .tab-dot {
+      color: var(--fern);
+    }
 
     /* ── CONTENT ── */
     #content {
@@ -118,17 +156,28 @@
       scrollbar-width: thin;
       scrollbar-color: var(--border) transparent;
     }
+
     .page {
       display: none;
       padding: 2.5rem 3rem 4rem;
       max-width: 860px;
       animation: fadeIn 0.18s ease;
     }
-    .page.active { display: block; }
+
+    .page.active {
+      display: block;
+    }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(5px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* ── STATUS BAR ── */
@@ -140,11 +189,14 @@
       background: var(--fern);
       font-family: var(--mono);
       font-size: 0.61rem;
-      color: rgba(242,232,207,0.9);
+      color: rgba(242, 232, 207, 0.9);
       letter-spacing: 0.07em;
       user-select: none;
     }
-    #statusbar .sr { opacity: 0.6; }
+
+    #statusbar .sr {
+      opacity: 0.6;
+    }
 
     /* ── PAGE HEADER ── */
     .page-header {
@@ -152,6 +204,7 @@
       padding-bottom: 1rem;
       border-bottom: 1px solid var(--border);
     }
+
     .page-header h1 {
       font-family: var(--mono);
       font-size: 1rem;
@@ -160,6 +213,7 @@
       letter-spacing: 0.02em;
       margin-bottom: 0.25rem;
     }
+
     .page-header .sub {
       font-family: var(--mono);
       font-size: 0.7rem;
@@ -180,25 +234,57 @@
       align-items: center;
       gap: 0.7rem;
     }
-    h2::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    h2::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
 
     /* ── BODY TEXT ── */
-    p { font-size: 0.9rem; color: var(--body); margin-bottom: 0.85rem; }
-    a { color: var(--forest); text-decoration: none; }
-    a:hover { color: var(--fern); text-decoration: underline; }
+    p {
+      font-size: 0.9rem;
+      color: var(--body);
+      margin-bottom: 0.85rem;
+    }
+
+    a {
+      color: var(--forest);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--fern);
+      text-decoration: underline;
+    }
+
     code {
       font-family: var(--mono);
       font-size: 0.76rem;
-      background: rgba(56,102,65,0.1);
+      background: rgba(56, 102, 65, 0.1);
       color: var(--forest);
       padding: 0.1em 0.4em;
       border-radius: 2px;
     }
 
     /* ── KV TABLE ── */
-    .kv { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-    .kv tr { border-bottom: 1px solid var(--border); }
-    .kv td { padding: 0.45rem 0; font-size: 0.82rem; vertical-align: top; }
+    .kv {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .kv tr {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .kv td {
+      padding: 0.45rem 0;
+      font-size: 0.82rem;
+      vertical-align: top;
+    }
+
     .kv td:first-child {
       font-family: var(--mono);
       font-size: 0.67rem;
@@ -216,10 +302,11 @@
       align-items: start;
       margin-bottom: 1rem;
     }
+
     .bio-photo {
       width: 150px;
       height: 188px;
-      background: rgba(56,102,65,0.07);
+      background: rgba(56, 102, 65, 0.07);
       border: 1px solid var(--border);
       display: flex;
       flex-direction: column;
@@ -233,7 +320,11 @@
     }
 
     /* ── PUBLICATIONS ── */
-    .pub-list { display: flex; flex-direction: column; }
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+    }
+
     .pub-item {
       display: grid;
       grid-template-columns: 48px 1fr;
@@ -241,7 +332,11 @@
       padding: 1rem 0;
       border-bottom: 1px solid var(--border);
     }
-    .pub-item:first-child { border-top: 1px solid var(--border); }
+
+    .pub-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
     .pub-year {
       font-family: var(--mono);
       font-size: 0.65rem;
@@ -249,17 +344,45 @@
       padding-top: 0.15rem;
       text-align: right;
     }
-    .pub-title { font-size: 0.87rem; color: var(--bright); line-height: 1.45; margin-bottom: 0.28rem; }
-    .pub-authors { font-size: 0.76rem; color: var(--muted); font-style: italic; margin-bottom: 0.22rem; }
-    .pub-meta { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-    .pub-journal { font-family: var(--mono); font-size: 0.65rem; color: var(--fern); }
+
+    .pub-title {
+      font-size: 0.87rem;
+      color: var(--bright);
+      line-height: 1.45;
+      margin-bottom: 0.28rem;
+    }
+
+    .pub-authors {
+      font-size: 0.76rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 0.22rem;
+    }
+
+    .pub-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .pub-journal {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--fern);
+    }
+
     .pub-doi {
       font-family: var(--mono);
       font-size: 0.62rem;
       color: var(--red);
       text-decoration: none;
     }
-    .pub-doi:hover { text-decoration: underline; color: var(--red); }
+
+    .pub-doi:hover {
+      text-decoration: underline;
+      color: var(--red);
+    }
 
     #pub-loading {
       font-family: var(--mono);
@@ -270,12 +393,33 @@
       align-items: center;
       gap: 0.8rem;
     }
-    #pub-error { font-family: var(--mono); font-size: 0.74rem; color: var(--red); padding: 1rem 0; }
-    .pub-footer { margin-top: 1.5rem; display: flex; align-items: center; gap: 1.2rem; }
-    #pub-count { font-family: var(--mono); font-size: 0.62rem; color: var(--dim); }
+
+    #pub-error {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      color: var(--red);
+      padding: 1rem 0;
+    }
+
+    .pub-footer {
+      margin-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    #pub-count {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--dim);
+    }
 
     /* ── TEACHING ── */
-    .course-list { display: flex; flex-direction: column; }
+    .course-list {
+      display: flex;
+      flex-direction: column;
+    }
+
     .course-item {
       display: grid;
       grid-template-columns: 88px 1fr;
@@ -283,7 +427,11 @@
       padding: 1rem 0;
       border-bottom: 1px solid var(--border);
     }
-    .course-item:first-child { border-top: 1px solid var(--border); }
+
+    .course-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
     .course-code {
       font-family: var(--mono);
       font-size: 0.67rem;
@@ -292,6 +440,7 @@
       text-align: right;
       line-height: 1.5;
     }
+
     .course-badge {
       display: block;
       font-size: 0.56rem;
@@ -299,16 +448,53 @@
       margin-top: 0.3rem;
       letter-spacing: 0.06em;
     }
-    .course-title { font-size: 0.88rem; color: var(--bright); margin-bottom: 0.28rem; }
-    .course-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+
+    .course-title {
+      font-size: 0.88rem;
+      color: var(--bright);
+      margin-bottom: 0.28rem;
+    }
+
+    .course-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
 
     /* ── PROJECTS ── */
-    .project-list { display: flex; flex-direction: column; }
-    .project-item { padding: 1.2rem 0; border-bottom: 1px solid var(--border); }
-    .project-item:first-child { border-top: 1px solid var(--border); }
-    .project-head { display: flex; align-items: baseline; gap: 0.9rem; margin-bottom: 0.38rem; flex-wrap: wrap; }
-    .project-title { font-size: 0.9rem; color: var(--bright); }
-    .project-dates { font-family: var(--mono); font-size: 0.63rem; color: var(--muted); }
+    .project-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-item {
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .project-head {
+      display: flex;
+      align-items: baseline;
+      gap: 0.9rem;
+      margin-bottom: 0.38rem;
+      flex-wrap: wrap;
+    }
+
+    .project-title {
+      font-size: 0.9rem;
+      color: var(--bright);
+    }
+
+    .project-dates {
+      font-family: var(--mono);
+      font-size: 0.63rem;
+      color: var(--muted);
+    }
+
     .badge {
       font-family: var(--mono);
       font-size: 0.56rem;
@@ -317,13 +503,39 @@
       border-radius: 2px;
       text-transform: uppercase;
     }
-    .badge-on  { background: rgba(106,153,78,0.14); color: var(--fern); border: 1px solid rgba(106,153,78,0.3); }
-    .badge-off { background: rgba(56,102,65,0.07);  color: var(--muted); border: 1px solid var(--border); }
-    .project-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 0.45rem; }
-    .project-funder { font-family: var(--mono); font-size: 0.64rem; color: var(--red); }
+
+    .badge-on {
+      background: rgba(106, 153, 78, 0.14);
+      color: var(--fern);
+      border: 1px solid rgba(106, 153, 78, 0.3);
+    }
+
+    .badge-off {
+      background: rgba(56, 102, 65, 0.07);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .project-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 0.45rem;
+    }
+
+    .project-funder {
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      color: var(--red);
+    }
 
     /* ── CONTACT ── */
-    .link-list { display: flex; flex-direction: column; margin-bottom: 1.5rem; }
+    .link-list {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1.5rem;
+    }
+
     .link-item {
       display: flex;
       align-items: center;
@@ -335,11 +547,32 @@
       font-size: 0.84rem;
       transition: color 0.15s;
     }
-    .link-item:first-child { border-top: 1px solid var(--border); }
-    .link-item:hover { color: var(--bright); text-decoration: none; }
-    .link-key { font-family: var(--mono); font-size: 0.66rem; color: var(--muted); min-width: 110px; }
-    .link-val { font-family: var(--mono); font-size: 0.76rem; color: var(--forest); }
-    .link-item:hover .link-val { color: var(--fern); }
+
+    .link-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .link-item:hover {
+      color: var(--bright);
+      text-decoration: none;
+    }
+
+    .link-key {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      color: var(--muted);
+      min-width: 110px;
+    }
+
+    .link-val {
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      color: var(--forest);
+    }
+
+    .link-item:hover .link-val {
+      color: var(--fern);
+    }
 
     .address-block {
       font-family: var(--mono);
@@ -347,7 +580,7 @@
       color: var(--muted);
       line-height: 1.9;
       padding: 1rem 1.2rem;
-      background: rgba(56,102,65,0.06);
+      background: rgba(56, 102, 65, 0.06);
       border: 1px solid var(--border);
       border-left: 3px solid var(--lime);
     }
@@ -368,9 +601,22 @@
       gap: 0.4rem;
       transition: border-color 0.15s, color 0.15s, background 0.15s;
     }
-    .btn:hover { border-color: var(--fern); color: var(--fern); text-decoration: none; }
-    .btn-a { border-color: var(--forest); color: var(--forest); }
-    .btn-a:hover { background: var(--forest); color: var(--cream); }
+
+    .btn:hover {
+      border-color: var(--fern);
+      color: var(--fern);
+      text-decoration: none;
+    }
+
+    .btn-a {
+      border-color: var(--forest);
+      color: var(--forest);
+    }
+
+    .btn-a:hover {
+      background: var(--forest);
+      color: var(--cream);
+    }
 
     /* ── INTERESTS TAG LIST ── */
     .tag-list {
@@ -379,393 +625,447 @@
       gap: 0.5rem;
       margin-top: 0.3rem;
     }
+
     .tag {
       font-family: var(--mono);
       font-size: 0.67rem;
       color: var(--fern);
-      background: rgba(106,153,78,0.1);
-      border: 1px solid rgba(106,153,78,0.25);
+      background: rgba(106, 153, 78, 0.1);
+      border: 1px solid rgba(106, 153, 78, 0.25);
       padding: 0.2em 0.65em;
       border-radius: 2px;
       letter-spacing: 0.03em;
     }
 
     /* ── SPIN ── */
-    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
-      .page { padding: 1.4rem 1rem 3rem; }
-      .bio-layout { grid-template-columns: 1fr; }
-      .pub-item    { grid-template-columns: 40px 1fr; }
-      .course-item { grid-template-columns: 64px 1fr; }
-      .tab { padding: 0.5rem 0.75rem; font-size: 0.66rem; }
+      .page {
+        padding: 1.4rem 1rem 3rem;
+      }
+
+      .bio-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .pub-item {
+        grid-template-columns: 40px 1fr;
+      }
+
+      .course-item {
+        grid-template-columns: 64px 1fr;
+      }
+
+      .tab {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.66rem;
+      }
     }
   </style>
 </head>
+
 <body>
-<div id="shell">
+  <div id="shell">
 
-  <!-- TOP BAR -->
-  <div id="topbar">
-    <div class="topbar-name">[Your Name]</div>
-    <div class="topbar-sub">Bioacoustics · Ecology · Signal Processing</div>
-  </div>
+    <!-- TOP BAR -->
+    <div id="topbar">
+      <div class="topbar-name">Théo Mariotte</div>
+      <div class="topbar-sub">Audio · Speech · Interpretability</div>
+    </div>
 
-  <!-- TAB BAR -->
-  <div id="tabbar">
-    <div class="tab active" data-tab="about">
-      <span class="tab-dot">●</span>About
+    <!-- TAB BAR -->
+    <div id="tabbar">
+      <div class="tab active" data-tab="about">
+        <span class="tab-dot">●</span>About
+      </div>
+      <div class="tab" data-tab="publications">
+        <span class="tab-dot">●</span>Publications
+      </div>
+      <div class="tab" data-tab="teaching">
+        <span class="tab-dot">●</span>Teaching
+      </div>
+      <div class="tab" data-tab="projects">
+        <span class="tab-dot">●</span>Projects
+      </div>
+      <div class="tab" data-tab="contact">
+        <span class="tab-dot">●</span>Contact
+      </div>
     </div>
-    <div class="tab" data-tab="publications">
-      <span class="tab-dot">●</span>Publications
-    </div>
-    <div class="tab" data-tab="teaching">
-      <span class="tab-dot">●</span>Teaching
-    </div>
-    <div class="tab" data-tab="projects">
-      <span class="tab-dot">●</span>Projects
-    </div>
-    <div class="tab" data-tab="contact">
-      <span class="tab-dot">●</span>Contact
-    </div>
-  </div>
 
-  <!-- CONTENT -->
-  <div id="content">
+    <!-- CONTENT -->
+    <div id="content">
 
-    <!-- ABOUT -->
-    <div class="page active" id="tab-about">
-      <div class="page-header">
-        <h1>[Your Name]</h1>
-        <div class="sub">Associate Professor · [Department] · [University]</div>
+      <!-- ABOUT -->
+      <div class="page active" id="tab-about">
+        <div class="page-header">
+          <h1>[Your Name]</h1>
+          <div class="sub">Associate Professor · Language and Speech Technology · LIUM · Le Mans Université</div>
+        </div>
+
+        <div class="bio-layout">
+          <div class="bio-photo">
+            <!-- Replace with: <img src="photo.jpg" style="width:100%;height:100%;object-fit:cover"> -->
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+              opacity="0.3">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+            <span>photo.jpg</span>
+          </div>
+          <div>
+            <p> <code>[Your Institution]</code></p>
+            <p></p>
+            <p> <code>[University]</code> 
+              <code>[Institution]</code> </p>
+            <table class="kv">
+              <tr>
+                <td>position</td>
+                <td>Associate Professor</td>
+              </tr>
+              <tr>
+                <td>institution</td>
+                <td>[Your University]</td>
+              </tr>
+              <tr>
+                <td>department</td>
+                <td>[Department Name]</td>
+              </tr>
+              <tr>
+                <td>location</td>
+                <td>[City, Country]</td>
+              </tr>
+              <tr>
+                <td>email</td>
+                <td><a href="mailto:theo.mariotte@univ-lemans.fr">theo.mariotte@univ-lemans.fr</a></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <h2>Research interests</h2>
+        <div class="tag-list">
+          <span class="tag">Interpretability</span>
+          <span class="tag">Speaker diarization</span>
+          <span class="tag">Audio segmentation</span>
+          <span class="tag">Multi-microphone</span>
+          <span class="tag">Model compression</span>
+          <span class="tag">Passive acoustic monitoring</span>
+          <span class="tag">Source separation</span>
+        </div>
+
+        <h2>Career</h2>
+        <table class="kv">
+          <tr>
+            <td>2024 – now</td>
+            <td>Associate Professor, LIUM - LST, Le Mans Université</td>
+          </tr>
+          <tr>
+            <td>2024 – 2024</td>
+            <td>Postdoctoral Fellow, ADASP Group, Télécom Paris</td>
+          </tr>
+          <tr>
+            <td>2020 – 2024</td>
+            <td>PhD in multi-microphone speech processing, LAUM - LIUM, Le Mans Université</td>
+          </tr>
+          <tr>
+            <td>2017 – 2020</td>
+            <td>Engineering degree in acoustics, ENSIM</td>
+          </tr>
+        </table>
+
+        <div style="margin-top:2rem;display:flex;gap:0.8rem;flex-wrap:wrap;">
+          <a href="cv.pdf" class="btn btn-a">↓ Download CV</a>
+          <a href="#" class="btn" onclick="switchTab('publications');return false;">→ Publications</a>
+        </div>
       </div>
 
-      <div class="bio-layout">
-        <div class="bio-photo">
-          <!-- Replace with: <img src="photo.jpg" style="width:100%;height:100%;object-fit:cover"> -->
-          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3">
-            <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+      <!-- PUBLICATIONS -->
+      <div class="page" id="tab-publications">
+        <div class="page-header">
+          <h1>Publications</h1>
+          <div class="sub">Synced from ORCID</div>
+        </div>
+
+        <script>const ORCID_ID = '0000-0002-2108-101X';</script>
+
+        <div id="pub-loading">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            style="animation:spin 1s linear infinite;flex-shrink:0">
+            <path
+              d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
           </svg>
-          <span>photo.jpg</span>
+          Loading from ORCID…
         </div>
-        <div>
-          <p>I am a researcher at <code>[Your Institution]</code>, working at the intersection of ecology, acoustics, and computational biology. My research focuses on how animal vocalizations encode information about individual identity, social behaviour, and environmental context.</p>
-          <p>I am particularly interested in passive acoustic monitoring as a non-invasive tool for biodiversity assessment, and in developing open-source methods that make bioacoustics accessible to the broader scientific community.</p>
-          <p>I completed my PhD at <code>[University]</code> and held a postdoctoral fellowship at <code>[Institution]</code> before joining my current institution.</p>
-          <table class="kv">
-            <tr><td>position</td><td>Associate Professor</td></tr>
-            <tr><td>institution</td><td>[Your University]</td></tr>
-            <tr><td>department</td><td>[Department Name]</td></tr>
-            <tr><td>location</td><td>[City, Country]</td></tr>
-            <tr><td>email</td><td><a href="mailto:you@university.edu">you@university.edu</a></td></tr>
-          </table>
+        <div id="pub-error"></div>
+        <div id="pub-list" class="pub-list"></div>
+
+        <div class="pub-footer">
+          <a id="orcid-link" href="#" target="_blank" class="btn btn-a" rel="noopener">↗ ORCID profile</a>
+          <span id="pub-count"></span>
         </div>
       </div>
 
-      <h2>Research interests</h2>
-      <div class="tag-list">
-        <span class="tag">passive acoustic monitoring</span>
-        <span class="tag">animal communication</span>
-        <span class="tag">soundscape ecology</span>
-        <span class="tag">deep learning for audio</span>
-        <span class="tag">biodiversity assessment</span>
-        <span class="tag">cetacean vocalizations</span>
-        <span class="tag">bat echolocation</span>
+      <!-- TEACHING -->
+      <div class="page" id="tab-teaching">
+        <div class="page-header">
+          <h1>Teaching</h1>
+          <div class="sub">Current courses and student supervision</div>
+        </div>
+
+        <h2>Courses</h2>
+        <div class="course-list">
+          <div class="course-item">
+            <div class="course-code">ML-001<span class="course-badge">M1 · Sem. 1</span></div>
+            <div>
+              <div class="course-title">Machine Learning</div>
+              <div class="course-desc">Old school machine learning approaches for classification including k-NN, Naive Bayes, Decision Trees and ensemble methods (Random Forest, Boosting, etc.). Python with scikit-learn.</div>
+            </div>
+          </div>
+          <div class="course-item">
+            <div class="course-code">DL-001<span class="course-badge">M1 · Sem. 2</span></div>
+            <div>
+              <div class="course-title">Deep Learning</div>
+              <div class="course-desc">Optimization of Deep Learning model training covering optimizers, scheduling strategies, architecture design etc. Python with Pytorch</div>
+            </div>
+          </div>
+          <div class="course-item">
+            <div class="course-code">DB-001<span class="course-badge">L1 · Sem. 2</span></div>
+            <div>
+              <div class="course-title">Relational Algebra</div>
+              <div class="course-desc">Queries in relational algebra, functional dependencies, 3-rd and 4-th normal forms. </div>
+            </div>
+          </div>
+          <div class="course-item">
+            <div class="course-code">DB-002<span class="course-badge">L3 · Sem. 1</span></div>
+            <div>
+              <div class="course-title">Databases</div>
+              <div class="course-desc">Database design, advanced SQL, procedures, triggers. PostgreSQL</div>
+            </div>
+          </div>
+        </div>
+
+        <h2>Supervision</h2>
+        <table class="kv">
+          <tr>
+            <td>MSc (current)</td>
+            <td>Xavier Coupé (2026) — Self-Supervised model compression<br>Valentin Gauthier (2026) — Sparse Autoencoders for controlable TTS
+            </td>
+          </tr>
+          <tr>
+            <td>MSc (alumni)</td>
+            <td>Hrant Arzumanyan (2025) — Deep learning for sound zone construction</td>
+          </tr>
+        </table>
       </div>
 
-      <h2>Career</h2>
-      <table class="kv">
-        <tr><td>2020 – now</td><td>Associate Professor, [Department], [University]</td></tr>
-        <tr><td>2017 – 2020</td><td>Postdoctoral Fellow, [Institution]</td></tr>
-        <tr><td>2013 – 2017</td><td>PhD in Ecology, [University]</td></tr>
-        <tr><td>2011 – 2013</td><td>MSc in [Field], [University]</td></tr>
-      </table>
+      <!-- PROJECTS -->
+      <div class="page" id="tab-projects">
+        <div class="page-header">
+          <h1>Projects</h1>
+          <div class="sub">Ongoing and completed research projects</div>
+        </div>
 
-      <div style="margin-top:2rem;display:flex;gap:0.8rem;flex-wrap:wrap;">
-        <a href="cv.pdf" class="btn btn-a">↓ Download CV</a>
-        <a href="#" class="btn" onclick="switchTab('publications');return false;">→ Publications</a>
+        <h2>Active</h2>
+        <div class="project-list">
+          <div class="project-item">
+            <div class="project-head">
+              <div class="project-title">BASIN-NMF: Dictionary learning for explaining audio models</div>
+              <div class="project-dates">2025–2027</div>
+              <span class="badge badge-on">active</span>
+            </div>
+            <div class="project-desc">Developing dictionary learning methods to deign interpretable audio models in the context of audio signal analysis.</div>
+            <div class="project-funder">Région Pays de la Loire</div>
+          </div>
+          <div class="project-item">
+            <div class="project-head">
+              <div class="project-title">DistoBird: microphone arrays for bird distance estimation in the context of species detection model calibration</div>
+              <div class="project-dates">2026–2029</div>
+              <span class="badge badge-on">to be started</span>
+            </div>
+            <div class="project-desc">Develop distance estimation estimators that can be used for uncertainty measurement in bird species detection models.</div>
+            <div class="project-funder">Le Mans Métropole</div>
+          </div>
+          <div class="project-item">
+            <div class="project-head">
+              <div class="project-title">Ecosound-XI: leveraging deep interpretable representations for soundscape monitoring</div>
+              <div class="project-dates">2026-2030</div>
+              <span class="badge badge-on">to be started</span>
+            </div>
+            <div class="project-desc">Collaboration with the <code>Muséum National d'Histoire Naturelle (MNHN)</code>. Develop interpretable neural representations of soundscapes to exploit large-scale PAM data. </div>
+            <div class="project-funder">Agence Nationale de la Recherche</div>
+          </div>
+        </div>
+
+        <!-- <h2>Past</h2>
+        <div class="project-list">
+          <div class="project-item">
+            <div class="project-head">
+              <div class="project-title">GlacierSound — Arctic soundscape baselines</div>
+              <div class="project-dates">2019–2022</div>
+              <span class="badge badge-off">completed</span>
+            </div>
+            <div class="project-desc">First multi-year acoustic baseline for Arctic fjord ecosystems, documenting shifts
+              in soundscape structure correlated with seasonal ice loss.</div>
+            <div class="project-funder">[Funding Agency] · €320K</div>
+          </div>
+        </div> -->
       </div>
+
+      <!-- CONTACT -->
+      <div class="page" id="tab-contact">
+        <div class="page-header">
+          <h1>Contact</h1>
+          <div class="sub">Reach out, collaborate, or say hello</div>
+        </div>
+
+        <h2>Academic</h2>
+        <div class="link-list">
+          <a href="mailto:theo.mariotte@univ-lemans.fr" class="link-item">
+            <span class="link-key">email</span><span class="link-val">theo.mariotte@univ-lemans.fr</span>
+          </a>
+          <a href="https://orcid.org/0000-0002-2108-101X" target="_blank" class="link-item" rel="noopener">
+            <span class="link-key">orcid</span><span class="link-val">0000-0002-2108-101X</span>
+          </a>
+          <a href="https://scholar.google.com/citations?user=q3HZFcwAAAAJ&hl=fr" target="_blank" class="link-item" rel="noopener">
+            <span class="link-key">google scholar</span><span class="link-val">scholar.google.com/theo-mariotte</span>
+          </a>
+           <a href="https://cv.hal.science/theo-mariotte" target="_blank" class="link-item" rel="noopener">
+            <span class="link-key">HAL</span><span class="link-val">cv.hal.science/theo-mariotte</span>
+          </a>
+        </div>
+
+        <h2>Online</h2>
+        <div class="link-list">
+          <a href="https://github.com/theomariotte" target="_blank" class="link-item" rel="noopener">
+            <span class="link-key">github</span><span class="link-val">github.com/theomariotte</span>
+          </a>
+          <a href="https://www.linkedin.com/in/theo-mariotte/" target="_blank" class="link-item" rel="noopener">
+            <span class="link-key">linkedin</span><span class="link-val">linkedin.com/in/theo-mariotte</span>
+          </a>
+        </div>
+
+        <h2>Office</h2>
+        <div class="address-block">
+          Office 226, Institut Claude Chappe (IC2)<br>
+          LIUM - Le Mans Université<br>
+          Av. René Laennec, Le Mans, France
+        </div>
+      </div>
+
+    </div><!-- /content -->
+
+    <!-- STATUS BAR -->
+    <div id="statusbar">
+      <span id="status-tab">About</span>
+      <span class="sr">your-name.github.io</span>
     </div>
 
-    <!-- PUBLICATIONS -->
-    <div class="page" id="tab-publications">
-      <div class="page-header">
-        <h1>Publications</h1>
-        <div class="sub">Synced from ORCID — update ORCID_ID in the source</div>
-      </div>
+  </div><!-- /shell -->
 
-      <script>const ORCID_ID = '0000-0002-2108-101X';</script>
+  <script>
+    /* ── TAB SWITCHING ── */
+    const TAB_LABELS = {
+      about: 'About', publications: 'Publications',
+      teaching: 'Teaching', projects: 'Projects', contact: 'Contact'
+    };
 
-      <div id="pub-loading">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite;flex-shrink:0">
-          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-        </svg>
-        Loading from ORCID…
-      </div>
-      <div id="pub-error"></div>
-      <div id="pub-list" class="pub-list"></div>
+    function switchTab(name) {
+      document.querySelectorAll('.tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.tab === name);
+      });
+      document.querySelectorAll('.page').forEach(p =>
+        p.classList.toggle('active', p.id === 'tab-' + name)
+      );
+      document.getElementById('status-tab').textContent = TAB_LABELS[name] || name;
+      document.getElementById('content').scrollTop = 0;
+    }
 
-      <div class="pub-footer">
-        <a id="orcid-link" href="#" target="_blank" class="btn btn-a" rel="noopener">↗ ORCID profile</a>
-        <span id="pub-count"></span>
-      </div>
-    </div>
+    document.querySelectorAll('.tab').forEach(t =>
+      t.addEventListener('click', () => switchTab(t.dataset.tab))
+    );
 
-    <!-- TEACHING -->
-    <div class="page" id="tab-teaching">
-      <div class="page-header">
-        <h1>Teaching</h1>
-        <div class="sub">Current courses and student supervision</div>
-      </div>
-
-      <h2>Courses</h2>
-      <div class="course-list">
-        <div class="course-item">
-          <div class="course-code">BIO-312<span class="course-badge">M2 · Sem. 2</span></div>
-          <div>
-            <div class="course-title">Bioacoustics: Theory and Methods</div>
-            <div class="course-desc">Sound production, propagation, and reception in animals. Students record, visualise, and analyse animal sounds using Python, R, and Audacity.</div>
-          </div>
-        </div>
-        <div class="course-item">
-          <div class="course-code">BIO-480<span class="course-badge">M1 · Sem. 1</span></div>
-          <div>
-            <div class="course-title">Computational Ecology</div>
-            <div class="course-desc">Applied data science for ecological datasets — time series analysis, species distribution modelling, and machine learning for biodiversity assessment.</div>
-          </div>
-        </div>
-        <div class="course-item">
-          <div class="course-code">BIO-110<span class="course-badge">L2 · Sem. 1</span></div>
-          <div>
-            <div class="course-title">Animal Behaviour</div>
-            <div class="course-desc">Ethology, behavioural ecology, and the evolutionary basis of social behaviour, communication, and cognition.</div>
-          </div>
-        </div>
-        <div class="course-item">
-          <div class="course-code">BIO-520<span class="course-badge">M2 · Intensive</span></div>
-          <div>
-            <div class="course-title">Field Methods in Ecology</div>
-            <div class="course-desc">Students deploy autonomous recording units, design monitoring protocols, and conduct independent fieldwork across local ecosystems.</div>
-          </div>
-        </div>
-      </div>
-
-      <h2>Supervision</h2>
-      <table class="kv">
-        <tr><td>PhD (current)</td><td>[Name] (2022–) — automated call detection in bats<br>[Name] (2023–) — vocal individuality in cetaceans</td></tr>
-        <tr><td>MSc (current)</td><td>[Name] (2024) — soundscape indices in wetlands</td></tr>
-        <tr><td>PhD (alumni)</td><td>[Name] (2021) — now postdoc at [Institution]</td></tr>
-      </table>
-    </div>
-
-    <!-- PROJECTS -->
-    <div class="page" id="tab-projects">
-      <div class="page-header">
-        <h1>Projects</h1>
-        <div class="sub">Ongoing and completed research projects</div>
-      </div>
-
-      <h2>Active</h2>
-      <div class="project-list">
-        <div class="project-item">
-          <div class="project-head">
-            <div class="project-title">SoundScape — National passive acoustic monitoring network</div>
-            <div class="project-dates">2023–2027</div>
-            <span class="badge badge-on">active</span>
-          </div>
-          <div class="project-desc">Building a continent-wide network of autonomous recording units to track long-term changes in biodiversity, phenology, and ecosystem health through soundscape analysis.</div>
-          <div class="project-funder">[Funding Agency] · €1.2M</div>
-        </div>
-        <div class="project-item">
-          <div class="project-head">
-            <div class="project-title">BatNet — Deep learning for ultrasonic call classification</div>
-            <div class="project-dates">2024–2026</div>
-            <span class="badge badge-on">active</span>
-          </div>
-          <div class="project-desc">Neural network models for species-level identification of bat echolocation calls, focusing on rare and cryptic species. Consortium across 8 European countries.</div>
-          <div class="project-funder">[EU Framework] · €480K</div>
-        </div>
-        <div class="project-item">
-          <div class="project-head">
-            <div class="project-title">VocalID — Individual recognition in cetaceans</div>
-            <div class="project-dates">2022–2025</div>
-            <span class="badge badge-on">active</span>
-          </div>
-          <div class="project-desc">Structure and function of individually distinctive vocalizations in bottlenose dolphins and harbour porpoises, using long-term hydrophone datasets.</div>
-          <div class="project-funder">[Foundation] · €290K</div>
-        </div>
-      </div>
-
-      <h2>Past</h2>
-      <div class="project-list">
-        <div class="project-item">
-          <div class="project-head">
-            <div class="project-title">GlacierSound — Arctic soundscape baselines</div>
-            <div class="project-dates">2019–2022</div>
-            <span class="badge badge-off">completed</span>
-          </div>
-          <div class="project-desc">First multi-year acoustic baseline for Arctic fjord ecosystems, documenting shifts in soundscape structure correlated with seasonal ice loss.</div>
-          <div class="project-funder">[Funding Agency] · €320K</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CONTACT -->
-    <div class="page" id="tab-contact">
-      <div class="page-header">
-        <h1>Contact</h1>
-        <div class="sub">Reach out, collaborate, or say hello</div>
-      </div>
-
-      <h2>Academic</h2>
-      <div class="link-list">
-        <a href="mailto:you@university.edu" class="link-item">
-          <span class="link-key">email</span><span class="link-val">you@university.edu</span>
-        </a>
-        <a href="https://orcid.org/0000-0000-0000-0000" target="_blank" class="link-item" rel="noopener">
-          <span class="link-key">orcid</span><span class="link-val">0000-0000-0000-0000</span>
-        </a>
-        <a href="https://scholar.google.com" target="_blank" class="link-item" rel="noopener">
-          <span class="link-key">google scholar</span><span class="link-val">scholar.google.com/…</span>
-        </a>
-        <a href="https://researchgate.net" target="_blank" class="link-item" rel="noopener">
-          <span class="link-key">researchgate</span><span class="link-val">researchgate.net/profile/…</span>
-        </a>
-      </div>
-
-      <h2>Online</h2>
-      <div class="link-list">
-        <a href="https://github.com/yourusername" target="_blank" class="link-item" rel="noopener">
-          <span class="link-key">github</span><span class="link-val">github.com/yourusername</span>
-        </a>
-        <a href="https://twitter.com/yourusername" target="_blank" class="link-item" rel="noopener">
-          <span class="link-key">twitter / X</span><span class="link-val">@yourusername</span>
-        </a>
-        <a href="https://mastodon.social/@yourusername" target="_blank" class="link-item" rel="noopener">
-          <span class="link-key">mastodon</span><span class="link-val">@yourusername@mastodon.social</span>
-        </a>
-        <a href="https://linkedin.com/in/yourprofile" target="_blank" class="link-item" rel="noopener">
-          <span class="link-key">linkedin</span><span class="link-val">linkedin.com/in/yourprofile</span>
-        </a>
-      </div>
-
-      <h2>Office</h2>
-      <div class="address-block">
-Room [XXX], [Building Name]<br>
-[Department of Ecology / Biology]<br>
-[University Name]<br>
-[Street], [City], [Country]
-      </div>
-    </div>
-
-  </div><!-- /content -->
-
-  <!-- STATUS BAR -->
-  <div id="statusbar">
-    <span id="status-tab">About</span>
-    <span class="sr">your-name.github.io</span>
-  </div>
-
-</div><!-- /shell -->
-
-<script>
-/* ── TAB SWITCHING ── */
-const TAB_LABELS = {
-  about: 'About', publications: 'Publications',
-  teaching: 'Teaching', projects: 'Projects', contact: 'Contact'
-};
-
-function switchTab(name) {
-  document.querySelectorAll('.tab').forEach(t => {
-    t.classList.toggle('active', t.dataset.tab === name);
-  });
-  document.querySelectorAll('.page').forEach(p =>
-    p.classList.toggle('active', p.id === 'tab-' + name)
-  );
-  document.getElementById('status-tab').textContent = TAB_LABELS[name] || name;
-  document.getElementById('content').scrollTop = 0;
-}
-
-document.querySelectorAll('.tab').forEach(t =>
-  t.addEventListener('click', () => switchTab(t.dataset.tab))
-);
-
-/* ── ORCID FETCH ── */
-(async function() {
-  const loading   = document.getElementById('pub-loading');
-  const errorEl   = document.getElementById('pub-error');
-  const listEl    = document.getElementById('pub-list');
-  const countEl   = document.getElementById('pub-count');
-  const orcidLink = document.getElementById('orcid-link');
-  orcidLink.href  = `https://orcid.org/${ORCID_ID}`;
-  const H = { 'Accept': 'application/json' };
-  try {
-    const res = await fetch(`https://pub.orcid.org/v3.0/${ORCID_ID}/works`, { headers: H });
-    if (!res.ok) throw new Error(`ORCID API returned HTTP ${res.status}`);
-    const data   = await res.json();
-    const groups = data.group || [];
-    if (!groups.length) throw new Error('No public works found on this ORCID profile.');
-
-    const works = await Promise.all(groups.map(async g => {
-      const s = g['work-summary']?.[0];
-      if (!s) return null;
+    /* ── ORCID FETCH ── */
+    (async function () {
+      const loading = document.getElementById('pub-loading');
+      const errorEl = document.getElementById('pub-error');
+      const listEl = document.getElementById('pub-list');
+      const countEl = document.getElementById('pub-count');
+      const orcidLink = document.getElementById('orcid-link');
+      orcidLink.href = `https://orcid.org/${ORCID_ID}`;
+      const H = { 'Accept': 'application/json' };
       try {
-        const r = await fetch(`https://pub.orcid.org/v3.0/${ORCID_ID}/work/${s['put-code']}`, { headers: H });
-        return r.ok ? parseWork(await r.json()) : parseSummary(s);
-      } catch { return parseSummary(s); }
-    }));
+        const res = await fetch(`https://pub.orcid.org/v3.0/${ORCID_ID}/works`, { headers: H });
+        if (!res.ok) throw new Error(`ORCID API returned HTTP ${res.status}`);
+        const data = await res.json();
+        const groups = data.group || [];
+        if (!groups.length) throw new Error('No public works found on this ORCID profile.');
 
-    const valid = works.filter(Boolean).sort((a,b) => (b.year||0)-(a.year||0));
-    loading.style.display = 'none';
-    countEl.textContent   = `${valid.length} record${valid.length!==1?'s':''} loaded`;
-    listEl.innerHTML      = valid.map(renderPub).join('');
-  } catch(err) {
-    loading.style.display = 'none';
-    errorEl.textContent   = `Could not load publications: ${err.message}`;
-  }
-})();
+        const works = await Promise.all(groups.map(async g => {
+          const s = g['work-summary']?.[0];
+          if (!s) return null;
+          try {
+            const r = await fetch(`https://pub.orcid.org/v3.0/${ORCID_ID}/work/${s['put-code']}`, { headers: H });
+            return r.ok ? parseWork(await r.json()) : parseSummary(s);
+          } catch { return parseSummary(s); }
+        }));
 
-function parseWork(w) {
-  return {
-    title:   w?.title?.title?.value || 'Untitled',
-    year:    w?.['publication-date']?.year?.value || null,
-    journal: w?.['journal-title']?.value || null,
-    doi:     eid(w?.['external-ids']?.['external-id'] || []),
-    authors: eauth(w?.contributors?.contributor || [])
-  };
-}
-function parseSummary(s) {
-  return {
-    title:   s?.title?.title?.value || 'Untitled',
-    year:    s?.['publication-date']?.year?.value || null,
-    journal: s?.['journal-title']?.value || null,
-    doi:     eid(s?.['external-ids']?.['external-id'] || []),
-    authors: ''
-  };
-}
-function eid(ids) { return ids.find(i=>i?.['external-id-type']==='doi')?.['external-id-value']||null; }
-function eauth(cs) { return cs.map(c=>c?.['credit-name']?.value||'').filter(Boolean).join(', '); }
+        const valid = works.filter(Boolean).sort((a, b) => (b.year || 0) - (a.year || 0));
+        loading.style.display = 'none';
+        countEl.textContent = `${valid.length} record${valid.length !== 1 ? 's' : ''} loaded`;
+        listEl.innerHTML = valid.map(renderPub).join('');
+      } catch (err) {
+        loading.style.display = 'none';
+        errorEl.textContent = `Could not load publications: ${err.message}`;
+      }
+    })();
 
-function renderPub({ title, year, journal, doi, authors }) {
-  const doiHtml = doi
-    ? `<a class="pub-doi" href="https://doi.org/${x(doi)}" target="_blank" rel="noopener">doi:${x(doi)}</a>`
-    : '';
-  return `<div class="pub-item">
-    <div class="pub-year">${year||'—'}</div>
+    function parseWork(w) {
+      return {
+        title: w?.title?.title?.value || 'Untitled',
+        year: w?.['publication-date']?.year?.value || null,
+        journal: w?.['journal-title']?.value || null,
+        doi: eid(w?.['external-ids']?.['external-id'] || []),
+        authors: eauth(w?.contributors?.contributor || [])
+      };
+    }
+    function parseSummary(s) {
+      return {
+        title: s?.title?.title?.value || 'Untitled',
+        year: s?.['publication-date']?.year?.value || null,
+        journal: s?.['journal-title']?.value || null,
+        doi: eid(s?.['external-ids']?.['external-id'] || []),
+        authors: ''
+      };
+    }
+    function eid(ids) { return ids.find(i => i?.['external-id-type'] === 'doi')?.['external-id-value'] || null; }
+    function eauth(cs) { return cs.map(c => c?.['credit-name']?.value || '').filter(Boolean).join(', '); }
+
+    function renderPub({ title, year, journal, doi, authors }) {
+      const doiHtml = doi
+        ? `<a class="pub-doi" href="https://doi.org/${x(doi)}" target="_blank" rel="noopener">doi:${x(doi)}</a>`
+        : '';
+      return `<div class="pub-item">
+    <div class="pub-year">${year || '—'}</div>
     <div>
       <div class="pub-title">${x(title)}</div>
-      ${authors?`<div class="pub-authors">${x(authors)}</div>`:''}
+      ${authors ? `<div class="pub-authors">${x(authors)}</div>` : ''}
       <div class="pub-meta">
-        ${journal?`<span class="pub-journal">${x(journal)}</span>`:''}
+        ${journal ? `<span class="pub-journal">${x(journal)}</span>` : ''}
         ${doiHtml}
       </div>
     </div>
   </div>`;
-}
-function x(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-</script>
+    }
+    function x(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+  </script>
 </body>
+
 </html>
