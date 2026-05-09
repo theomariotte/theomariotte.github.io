@@ -1,1 +1,859 @@
-Hello world
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. [Your Name] — Bioacoustics Researcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a18;
+      --paper: #f5f2eb;
+      --sage: #7a8c6e;
+      --mist: #b8c4b0;
+      --warm: #c8a97a;
+      --faint: #e8e4db;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --mono: 'DM Mono', 'Courier New', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NATURE BACKGROUND SVG ── */
+    .nature-bg {
+      position: fixed;
+      top: 0; right: 0;
+      width: 420px;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.13;
+    }
+
+    .nature-bg-left {
+      position: fixed;
+      bottom: 0; left: 0;
+      width: 280px;
+      height: 60vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.09;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 3.5rem;
+      background: rgba(245, 242, 235, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--faint);
+    }
+
+    .nav-logo {
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage);
+      font-family: var(--mono);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.8rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.65;
+      transition: opacity 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { opacity: 1; color: var(--sage); }
+
+    /* ── HERO ── */
+    #home {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 3.5rem 4rem;
+      z-index: 1;
+    }
+
+    .hero-content { max-width: 620px; }
+
+    .hero-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .hero-label::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--sage);
+    }
+
+    h1 {
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.3rem;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--sage);
+    }
+
+    .hero-tagline {
+      font-size: 1.1rem;
+      color: var(--ink);
+      opacity: 0.55;
+      margin: 1.8rem 0 2.8rem;
+      max-width: 480px;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.8rem 2rem;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--paper);
+      border: 1px solid var(--ink);
+    }
+
+    .btn-primary:hover {
+      background: var(--sage);
+      border-color: var(--sage);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--mist);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--sage);
+      color: var(--sage);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 6rem 3.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--warm);
+      margin-bottom: 0.8rem;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      margin-bottom: 2.5rem;
+      line-height: 1.1;
+    }
+
+    h2 em { font-style: italic; color: var(--sage); }
+
+    .divider {
+      width: 48px;
+      height: 1px;
+      background: var(--mist);
+      margin: 1.5rem 0;
+    }
+
+    /* ── BIO ── */
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    .bio-portrait {
+      width: 180px;
+      height: 220px;
+      background: var(--faint);
+      border: 1px solid var(--mist);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bio-portrait-placeholder {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--mist);
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    .bio-text p { margin-bottom: 1.2rem; opacity: 0.85; }
+
+    .bio-meta {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .bio-meta-item {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--sage);
+      display: flex;
+      gap: 0.8rem;
+      align-items: baseline;
+    }
+
+    .bio-meta-item span:first-child { opacity: 0.5; min-width: 80px; }
+
+    /* ── PUBLICATIONS ── */
+    .pub-list { display: flex; flex-direction: column; gap: 1.8rem; }
+
+    .pub-item {
+      border-left: 2px solid var(--faint);
+      padding-left: 1.5rem;
+      transition: border-color 0.2s;
+    }
+
+    .pub-item:hover { border-color: var(--sage); }
+
+    .pub-year {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--warm);
+      margin-bottom: 0.3rem;
+    }
+
+    .pub-title {
+      font-size: 1.05rem;
+      font-weight: 400;
+      line-height: 1.4;
+      margin-bottom: 0.3rem;
+    }
+
+    .pub-authors {
+      font-size: 0.88rem;
+      opacity: 0.55;
+      font-style: italic;
+    }
+
+    .pub-journal {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      color: var(--sage);
+      margin-top: 0.4rem;
+    }
+
+    .pub-link {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      color: var(--warm);
+      text-decoration: none;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+      display: inline-block;
+    }
+
+    .pub-link:hover { color: var(--ink); }
+
+    /* ── TEACHING ── */
+    .teaching-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .course-card {
+      border: 1px solid var(--faint);
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .course-card:hover {
+      border-color: var(--mist);
+      transform: translateY(-2px);
+    }
+
+    .course-code {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      color: var(--warm);
+      margin-bottom: 0.5rem;
+    }
+
+    .course-title {
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .course-desc {
+      font-size: 0.85rem;
+      opacity: 0.6;
+      line-height: 1.5;
+    }
+
+    .course-level {
+      display: inline-block;
+      margin-top: 0.8rem;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sage);
+      border: 1px solid var(--mist);
+      padding: 0.15rem 0.5rem;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-list { display: flex; flex-direction: column; gap: 2.2rem; }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .project-year {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--mist);
+      padding-top: 0.2rem;
+      text-align: right;
+    }
+
+    .project-status {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      color: var(--sage);
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+
+    .project-title {
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .project-desc {
+      font-size: 0.88rem;
+      opacity: 0.65;
+      line-height: 1.6;
+    }
+
+    .project-funder {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      color: var(--warm);
+      margin-top: 0.5rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact { max-width: 700px; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 1rem;
+    }
+
+    .contact-group h3 {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 1.2rem;
+      font-weight: 400;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.92rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--faint);
+      transition: color 0.2s, border-color 0.2s;
+      opacity: 0.8;
+    }
+
+    .contact-link:hover {
+      color: var(--sage);
+      border-color: var(--mist);
+      opacity: 1;
+    }
+
+    .contact-icon {
+      width: 18px;
+      height: 18px;
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+
+    .contact-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--faint);
+      padding: 2rem 3.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: var(--ink);
+      opacity: 0.4;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-content > * {
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+    }
+    .hero-label      { animation-delay: 0.1s; }
+    .hero-content h1 { animation-delay: 0.22s; }
+    .hero-tagline    { animation-delay: 0.36s; }
+    .hero-cta        { animation-delay: 0.5s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.4rem; }
+      .nav-links { gap: 1.4rem; }
+      #home, section { padding-left: 1.4rem; padding-right: 1.4rem; }
+      .bio-grid { grid-template-columns: 1fr; }
+      .bio-portrait { width: 120px; height: 150px; }
+      .teaching-grid { grid-template-columns: 1fr; }
+      .project-item { grid-template-columns: 1fr; gap: 0.3rem; }
+      .project-year { text-align: left; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .nature-bg { width: 200px; opacity: 0.08; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nature background illustration – right side -->
+  <svg class="nature-bg" viewBox="0 0 420 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Tall stem -->
+    <path d="M280 900 Q270 700 290 500 Q310 320 260 100" stroke="#7a8c6e" stroke-width="1.5" fill="none"/>
+    <!-- Leaves on stem -->
+    <path d="M282 780 Q230 740 210 680 Q260 700 282 780Z" fill="#7a8c6e"/>
+    <path d="M285 710 Q340 670 360 600 Q310 640 285 710Z" fill="#7a8c6e"/>
+    <path d="M278 630 Q220 580 205 510 Q255 550 278 630Z" fill="#7a8c6e" opacity="0.8"/>
+    <path d="M283 560 Q340 520 355 445 Q305 480 283 560Z" fill="#7a8c6e" opacity="0.8"/>
+    <path d="M275 480 Q215 430 200 360 Q252 400 275 480Z" fill="#7a8c6e" opacity="0.7"/>
+    <path d="M280 400 Q340 355 352 280 Q300 320 280 400Z" fill="#7a8c6e" opacity="0.7"/>
+    <path d="M272 310 Q210 258 198 188 Q248 230 272 310Z" fill="#7a8c6e" opacity="0.6"/>
+    <path d="M277 230 Q335 185 348 115 Q296 155 277 230Z" fill="#7a8c6e" opacity="0.5"/>
+    <!-- Second thinner stem -->
+    <path d="M340 900 Q360 750 330 600 Q300 450 350 280" stroke="#7a8c6e" stroke-width="0.8" fill="none" opacity="0.5"/>
+    <path d="M338 820 Q385 790 395 740 Q355 760 338 820Z" fill="#7a8c6e" opacity="0.4"/>
+    <path d="M335 700 Q290 670 282 618 Q318 645 335 700Z" fill="#7a8c6e" opacity="0.4"/>
+    <!-- Birds in flight (simple strokes) -->
+    <g opacity="0.7" transform="translate(60,160)">
+      <path d="M0 0 Q8 -5 16 0" stroke="#1a1a18" stroke-width="1.2" fill="none"/>
+      <path d="M16 0 Q24 -5 32 0" stroke="#1a1a18" stroke-width="1.2" fill="none"/>
+    </g>
+    <g opacity="0.5" transform="translate(100,120) scale(0.75)">
+      <path d="M0 0 Q8 -5 16 0" stroke="#1a1a18" stroke-width="1.2" fill="none"/>
+      <path d="M16 0 Q24 -5 32 0" stroke="#1a1a18" stroke-width="1.2" fill="none"/>
+    </g>
+    <g opacity="0.4" transform="translate(35,90) scale(0.55)">
+      <path d="M0 0 Q8 -5 16 0" stroke="#1a1a18" stroke-width="1.2" fill="none"/>
+      <path d="M16 0 Q24 -5 32 0" stroke="#1a1a18" stroke-width="1.2" fill="none"/>
+    </g>
+    <!-- Perching bird silhouette -->
+    <g transform="translate(175,350)" opacity="0.6">
+      <ellipse cx="12" cy="8" rx="10" ry="6" fill="#1a1a18"/>
+      <circle cx="21" cy="3" r="4.5" fill="#1a1a18"/>
+      <path d="M24 2 L30 0 L25 3Z" fill="#1a1a18"/>
+      <path d="M8 14 L4 22 L10 14Z" fill="#1a1a18"/>
+      <path d="M14 14 L12 22 L17 14Z" fill="#1a1a18"/>
+      <path d="M2 8 Q-8 3 -12 6 Q-6 6 2 10Z" fill="#1a1a18"/>
+    </g>
+    <!-- Fine grass / reed lines -->
+    <line x1="380" y1="900" x2="375" y2="820" stroke="#7a8c6e" stroke-width="0.8" opacity="0.4"/>
+    <line x1="395" y1="900" x2="388" y2="810" stroke="#7a8c6e" stroke-width="0.8" opacity="0.3"/>
+    <line x1="365" y1="900" x2="360" y2="840" stroke="#7a8c6e" stroke-width="0.8" opacity="0.35"/>
+  </svg>
+
+  <!-- Nature background – bottom left -->
+  <svg class="nature-bg-left" viewBox="0 0 280 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M30 400 Q40 320 20 240 Q10 170 50 80" stroke="#7a8c6e" stroke-width="1.2" fill="none"/>
+    <path d="M28 360 Q80 330 95 280 Q48 305 28 360Z" fill="#7a8c6e" opacity="0.5"/>
+    <path d="M25 280 Q-20 248 -28 195 Q18 228 25 280Z" fill="#7a8c6e" opacity="0.4"/>
+    <path d="M30 200 Q82 168 90 112 Q42 148 30 200Z" fill="#7a8c6e" opacity="0.35"/>
+    <g opacity="0.5" transform="translate(110,60)">
+      <path d="M0 0 Q10 -6 20 0" stroke="#1a1a18" stroke-width="1.1" fill="none"/>
+      <path d="M20 0 Q30 -6 40 0" stroke="#1a1a18" stroke-width="1.1" fill="none"/>
+    </g>
+    <g opacity="0.35" transform="translate(145,30) scale(0.65)">
+      <path d="M0 0 Q10 -6 20 0" stroke="#1a1a18" stroke-width="1.1" fill="none"/>
+      <path d="M20 0 Q30 -6 40 0" stroke="#1a1a18" stroke-width="1.1" fill="none"/>
+    </g>
+  </svg>
+
+  <!-- ── NAVIGATION ── -->
+  <nav>
+    <a href="#home" class="nav-logo">YourName</a>
+    <ul class="nav-links">
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#publications" class="nav-link">Publications</a></li>
+      <li><a href="#teaching" class="nav-link">Teaching</a></li>
+      <li><a href="#projects" class="nav-link">Projects</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section id="home" style="max-width: none; padding-top: 0;">
+    <div class="hero-content">
+      <div class="hero-label">Bioacoustics · Ecology · Signal Processing</div>
+      <h1>Dr. <em>Your</em><br>Name</h1>
+      <p class="hero-tagline">Listening to the natural world — decoding the acoustic signatures of ecosystems to understand biodiversity and environmental change.</p>
+      <div class="hero-cta">
+        <a href="#publications" class="btn btn-primary">View Publications</a>
+        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section id="about">
+    <div class="section-label">01 — About</div>
+    <h2>A researcher <em>attuned</em><br>to wild sound</h2>
+    <div class="bio-grid">
+      <div class="bio-portrait">
+        <!-- Replace this block with an <img> tag pointing to your photo -->
+        <div class="bio-portrait-placeholder">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="18" r="10" stroke="#b8c4b0" stroke-width="1"/>
+            <path d="M6 44 Q6 32 24 32 Q42 32 42 44" stroke="#b8c4b0" stroke-width="1" fill="none"/>
+          </svg>
+          <br>your photo
+        </div>
+      </div>
+      <div class="bio-text">
+        <p>I am a researcher at <strong>[Your Institution]</strong>, where I lead work at the intersection of ecology, acoustics, and computational biology. My research explores how animal vocalizations encode information about individual identity, social behaviour, and environmental context.</p>
+        <p>I am particularly interested in passive acoustic monitoring as a non-invasive tool for biodiversity assessment, and in developing open-source methods to make bioacoustics analysis accessible to the broader scientific community.</p>
+        <p>Before my current position I completed my PhD at <em>[University]</em> and was a postdoctoral fellow at <em>[Institution]</em>.</p>
+        <div class="bio-meta">
+          <div class="bio-meta-item"><span>Position</span> Associate Professor</div>
+          <div class="bio-meta-item"><span>Institution</span> [Your University]</div>
+          <div class="bio-meta-item"><span>Department</span> [Department Name]</div>
+          <div class="bio-meta-item"><span>Location</span> [City, Country]</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PUBLICATIONS ── -->
+  <section id="publications">
+    <div class="section-label">02 — Publications</div>
+    <h2>Selected <em>works</em></h2>
+    <div class="divider"></div>
+    <div class="pub-list">
+
+      <div class="pub-item">
+        <div class="pub-year">2024</div>
+        <div class="pub-title">Passive acoustic indices as proxies for avian species richness in temperate forests</div>
+        <div class="pub-authors">Your Name, Co-Author A, Co-Author B</div>
+        <div class="pub-journal">Methods in Ecology and Evolution · Vol. 15, pp. 234–248</div>
+        <a href="#" class="pub-link">DOI →</a>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-year">2023</div>
+        <div class="pub-title">Deep learning approaches for automated call detection across taxa</div>
+        <div class="pub-authors">Co-Author A, Your Name, Co-Author C</div>
+        <div class="pub-journal">PLOS Computational Biology · Vol. 19, e1011256</div>
+        <a href="#" class="pub-link">DOI →</a>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-year">2022</div>
+        <div class="pub-title">Vocal individuality and social network structure in a colonial breeding seabird</div>
+        <div class="pub-authors">Your Name, Co-Author D</div>
+        <div class="pub-journal">Animal Behaviour · Vol. 186, pp. 45–60</div>
+        <a href="#" class="pub-link">DOI →</a>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-year">2021</div>
+        <div class="pub-title">Long-term soundscape monitoring reveals phenological shifts driven by climate change</div>
+        <div class="pub-authors">Your Name, Co-Author E, Co-Author F</div>
+        <div class="pub-journal">Global Change Biology · Vol. 27, pp. 3801–3815</div>
+        <a href="#" class="pub-link">DOI →</a>
+      </div>
+
+    </div>
+    <div style="margin-top: 2.5rem;">
+      <a href="https://scholar.google.com" target="_blank" class="btn btn-secondary">Full list on Google Scholar →</a>
+    </div>
+  </section>
+
+  <!-- ── TEACHING ── -->
+  <section id="teaching">
+    <div class="section-label">03 — Teaching</div>
+    <h2>Courses &amp; <em>supervision</em></h2>
+    <div class="divider"></div>
+    <div class="teaching-grid">
+
+      <div class="course-card">
+        <div class="course-code">BIO-312</div>
+        <div class="course-title">Bioacoustics: Theory and Methods</div>
+        <div class="course-desc">An introduction to sound production, propagation, and reception in animals. Students learn to record, visualise, and analyse animal sounds using open-source tools.</div>
+        <span class="course-level">Master's · Semester 2</span>
+      </div>
+
+      <div class="course-card">
+        <div class="course-code">BIO-480</div>
+        <div class="course-title">Computational Ecology</div>
+        <div class="course-desc">Applied data science for ecological datasets — time series analysis, species distribution modelling, and machine learning for biodiversity assessment.</div>
+        <span class="course-level">Master's · Semester 1</span>
+      </div>
+
+      <div class="course-card">
+        <div class="course-code">BIO-110</div>
+        <div class="course-title">Animal Behaviour</div>
+        <div class="course-desc">Foundational course covering ethology, behavioural ecology, and the evolutionary basis of social behaviour, communication, and cognition.</div>
+        <span class="course-level">Bachelor's · Semester 1</span>
+      </div>
+
+      <div class="course-card">
+        <div class="course-code">BIO-520</div>
+        <div class="course-title">Field Methods in Ecology</div>
+        <div class="course-desc">Hands-on field course. Students deploy autonomous recording units, design monitoring protocols, and conduct independent fieldwork across local ecosystems.</div>
+        <span class="course-level">Master's · Intensive</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── PROJECTS ── -->
+  <section id="projects">
+    <div class="section-label">04 — Projects</div>
+    <h2>Ongoing <em>research</em></h2>
+    <div class="divider"></div>
+    <div class="projects-list">
+
+      <div class="project-item">
+        <div class="project-year">
+          2023–2027
+          <span class="project-status">● Active</span>
+        </div>
+        <div>
+          <div class="project-title">SoundScape: National passive acoustic monitoring network</div>
+          <div class="project-desc">Building a continent-wide network of autonomous recording units to track long-term changes in biodiversity, phenology, and ecosystem health through soundscape analysis.</div>
+          <div class="project-funder">Funded by [Funding Agency] · €1.2M</div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-year">
+          2024–2026
+          <span class="project-status">● Active</span>
+        </div>
+        <div>
+          <div class="project-title">BatNet: Automated ultrasonic call classification</div>
+          <div class="project-desc">Developing deep learning models for species-level identification of bat echolocation calls, with a focus on rare and cryptic species. Partners across 8 European countries.</div>
+          <div class="project-funder">Funded by [EU Framework] · €480K</div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-year">
+          2022–2025
+          <span class="project-status">● Active</span>
+        </div>
+        <div>
+          <div class="project-title">VocalID: Individual recognition in cetaceans</div>
+          <div class="project-desc">Investigating the structure and function of individually distinctive vocalizations in bottlenose dolphins and harbour porpoises using long-term acoustic datasets.</div>
+          <div class="project-funder">Funded by [Foundation] · €290K</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact">
+    <div class="section-label">05 — Contact</div>
+    <h2>Let's <em>connect</em></h2>
+    <div class="divider"></div>
+    <div class="contact-grid">
+      <div class="contact-group">
+        <h3>Academic &amp; Email</h3>
+        <a href="mailto:you@university.edu" class="contact-link">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          <span class="contact-label">you@university.edu</span>
+        </a>
+        <a href="https://scholar.google.com" target="_blank" class="contact-link">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422A12.083 12.083 0 0 1 21 17c0 3.314-4.03 6-9 6s-9-2.686-9-6c0-1.07.37-2.08 1-2.93L12 14z"/></svg>
+          <span class="contact-label">Google Scholar</span>
+        </a>
+        <a href="https://orcid.org" target="_blank" class="contact-link">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="10"/><path d="M9 12h6M12 7v10"/></svg>
+          <span class="contact-label">ORCID Profile</span>
+        </a>
+        <a href="https://researchgate.net" target="_blank" class="contact-link">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 4h16v16H4z" rx="2"/><path d="M8 12h4m0 0a2 2 0 1 0 0-4H8v8"/></svg>
+          <span class="contact-label">ResearchGate</span>
+        </a>
+      </div>
+      <div class="contact-group">
+        <h3>Online Presence</h3>
+        <a href="https://github.com/yourusername" target="_blank" class="contact-link">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          <span class="contact-label">github.com/yourusername</span>
+        </a>
+        <a href="https://twitter.com/yourusername" target="_blank" class="contact-link">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+          <span class="contact-label">@yourusername</span>
+        </a>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          <span class="contact-label">LinkedIn</span>
+        </a>
+        <a href="https://mastodon.social/@yourusername" target="_blank" class="contact-link">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M21 7.5c0-4.5-3-6-3-6H6S3 3 3 7.5v5.25c.25 4.13 3 5.63 9 6.25 6-.62 8.75-2.12 9-6.25V7.5Z"/><path d="M17 10v4.5M7 10v4.5M12 7v7.5"/></svg>
+          <span class="contact-label">Mastodon</span>
+        </a>
+      </div>
+    </div>
+
+    <div style="margin-top: 3rem; padding: 1.5rem; border: 1px solid var(--faint);">
+      <div class="section-label" style="margin-bottom: 0.5rem;">Office</div>
+      <p style="font-size: 0.88rem; opacity: 0.7; line-height: 1.7;">
+        Room [XXX], [Building Name]<br>
+        [Department of Ecology / Biology]<br>
+        [University Name]<br>
+        [Street Address]<br>
+        [City, Postcode, Country]
+      </p>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <span>© 2025 Dr. [Your Name]</span>
+    <span>Built with HTML · Hosted on GitHub Pages</span>
+  </footer>
+
+  <script>
+    // Highlight active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const links = document.querySelectorAll('.nav-link');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { threshold: 0.3 });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>
